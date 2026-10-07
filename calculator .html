@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Calculator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+.container{
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    border-radius: 25px;
+    padding: 30px;
+    width: 360px;
+
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.6),
+        inset 0 0 10px rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.4s ease;
+}
+
+.container:hover{
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 15px 40px rgba(0,0,0,0.8),
+        0 0 20px rgba(59,130,246,0.4);
+}
+
+.title{
+    text-align:center;
+    color:#fff;
+    font-size:24px;
+    margin-bottom:20px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-shadow: 0 0 15px rgba(59,130,246,0.8);
+}
+
+.title i{
+    margin-right:8px;
+    color:#3b82f6;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+label{
+    color:#cbd5f5;
+    font-size:14px;
+}
+
+input{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    padding:10px;
+    margin-top:5px;
+    background:#1e293b;
+    color:#fff;
+    font-size:16px;
+}
+
+input:focus{
+    outline:none;
+    border:1px solid #3b82f6;
+    box-shadow:0 0 10px #3b82f6;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+button{
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+    color:#fff;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.add{background:#3b82f6;}
+.sub{background:#ef4444;}
+.mul{background:#10b981;}
+.div{background:#f59e0b;}
+.pow{background:#8b5cf6;}
+.mod{background:#ec4899;}
+
+#res{
+    margin-top:10px;
+    background:#000;
+    color:#00ff99;
+    font-weight:bold;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 🔥 Title with Calculator Icon -->
+    <div class="title">
+        <i class="fa-solid fa-calculator"></i> Calculator
+    </div>
+
+    <div class="input-group">
+        <label>Number 1</label>
+        <input type="number" id="n1">
+    </div>
+
+    <div class="input-group">
+        <label>Number 2</label>
+        <input type="number" id="n2">
+    </div>
+
+    <div class="buttons">
+        <button class="add" onclick="add()"><i class="fa-solid fa-plus"></i></button>
+        <button class="sub" onclick="sub()"><i class="fa-solid fa-minus"></i></button>
+        <button class="mul" onclick="mul()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="div" onclick="div()"><i class="fa-solid fa-divide"></i></button>
+        <button class="pow" onclick="pow()"><i class="fa-solid fa-superscript"></i></button>
+        <button class="mod" onclick="mod()"><i class="fa-solid fa-percent"></i></button>
+    </div>
+
+    <div class="input-group">
+        <label>Result</label>
+        <input type="text" id="res" readonly>
+    </div>
+
+</div>
+
+<script>
+function getValues(){
+    let n1 = parseFloat(document.getElementById("n1").value) || 0;
+    let n2 = parseFloat(document.getElementById("n2").value) || 0;
+    return {n1,n2};
+}
+
+function setResult(val){
+    document.getElementById("res").value = val;
+}
+
+function add(){ let {n1,n2}=getValues(); setResult(n1+n2); }
+function sub(){ let {n1,n2}=getValues(); setResult(n1-n2); }
+function mul(){ let {n1,n2}=getValues(); setResult(n1*n2); }
+function div(){ let {n1,n2}=getValues(); setResult(n2!==0 ? n1/n2 : "Error"); }
+function pow(){ let {n1,n2}=getValues(); setResult(n1**n2); }
+function mod(){ let {n1,n2}=getValues(); setResult(n1 % n2); }
+</script>
+
+</body>
+</html>
